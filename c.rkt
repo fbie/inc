@@ -15,7 +15,7 @@
 (define (immediate-rep x)
   (cond [(integer? x) (shift x fixnum-shift)]
         [(boolean? x) (if x true-rep false-rep)]
-        [(char? x) (shift (char->integer x) char-shift)]
+        [(char? x) (bitwise-ior (shift (char->integer x) char-shift) 15)]
         [(and (list? x) (eq? empty x)) nil-rep]))
 
 (define (compile-program x)
@@ -29,4 +29,4 @@
   (emit "scheme_entry:")
   (compile-program x))
 
-(compile-scheme-entry '())
+(compile-scheme-entry #\g)
