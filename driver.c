@@ -11,8 +11,8 @@
 
 #define empty_list 23
 
-#define true_rep 63
-#define false_rep (true_rep >> 1)
+#define true_rep ((1 << 7) | 63)
+#define false_rep 63
 
 int main(int argc, char** argv) {
   const int val = scheme_entry();
@@ -26,6 +26,8 @@ int main(int argc, char** argv) {
     printf("#t\n");
   } else if (val == false_rep) {
     printf("#f\n");
+  } else {
+    printf("Wrong: %d\n", val);
   }
   return 0;
 }
